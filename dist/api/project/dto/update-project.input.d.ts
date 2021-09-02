@@ -1,5 +1,5 @@
 import { CreateProjectInput } from './create-project.input';
-declare const UpdateProjectInput_base: import("@nestjs/common").Type<Partial<CreateProjectInput>>;
+declare const UpdateProjectInput_base: import("@nestjs/mapped-types").MappedType<Partial<CreateProjectInput>>;
 export declare class UpdateProjectInput extends UpdateProjectInput_base {
     id: number;
 }

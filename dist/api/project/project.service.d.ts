@@ -1,9 +1,10 @@
-import { CreateProjectInput } from './dto/create-project.input';
-import { UpdateProjectInput } from './dto/update-project.input';
+import { Project } from "@prisma/client";
+import { CreateProject } from "src/graphql";
+import { PrismaService } from "src/prisma.service";
 export declare class ProjectService {
-    create(createProjectInput: CreateProjectInput): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateProjectInput: UpdateProjectInput): string;
-    remove(id: number): string;
+    private prisma;
+    constructor(prisma: PrismaService);
+    create(input: CreateProject): Promise<Project>;
+    findAll(): Promise<Project[]>;
+    findOne(id: string): Promise<Project>;
 }

@@ -14,66 +14,43 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
+const graphql_2 = require("../../graphql");
 const project_service_1 = require("./project.service");
-const project_entity_1 = require("./entities/project.entity");
-const create_project_input_1 = require("./dto/create-project.input");
-const update_project_input_1 = require("./dto/update-project.input");
 let ProjectResolver = class ProjectResolver {
     constructor(projectService) {
         this.projectService = projectService;
     }
-    createProject(createProjectInput) {
-        return this.projectService.create(createProjectInput);
+    async create(input) {
+        return this.projectService.create(input);
     }
-    findAll() {
+    async findAll() {
         return this.projectService.findAll();
     }
-    findOne(id) {
-        return this.projectService.findOne(id);
-    }
-    updateProject(updateProjectInput) {
-        return this.projectService.update(updateProjectInput.id, updateProjectInput);
-    }
-    removeProject(id) {
-        return this.projectService.remove(id);
+    async findOne(args) {
+        return this.projectService.findOne(args);
     }
 };
 __decorate([
-    (0, graphql_1.Mutation)(() => project_entity_1.Project),
-    __param(0, (0, graphql_1.Args)('createProjectInput')),
+    (0, graphql_1.Mutation)("createProject"),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_project_input_1.CreateProjectInput]),
-    __metadata("design:returntype", void 0)
-], ProjectResolver.prototype, "createProject", null);
+    __metadata("design:paramtypes", [graphql_2.CreateProject]),
+    __metadata("design:returntype", Promise)
+], ProjectResolver.prototype, "create", null);
 __decorate([
-    (0, graphql_1.Query)(() => [project_entity_1.Project], { name: 'project' }),
+    (0, graphql_1.Query)("projects"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProjectResolver.prototype, "findAll", null);
 __decorate([
-    (0, graphql_1.Query)(() => project_entity_1.Project, { name: 'project' }),
-    __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
+    (0, graphql_1.Query)("project"),
+    __param(0, (0, graphql_1.Args)("id")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
 ], ProjectResolver.prototype, "findOne", null);
-__decorate([
-    (0, graphql_1.Mutation)(() => project_entity_1.Project),
-    __param(0, (0, graphql_1.Args)('updateProjectInput')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [update_project_input_1.UpdateProjectInput]),
-    __metadata("design:returntype", void 0)
-], ProjectResolver.prototype, "updateProject", null);
-__decorate([
-    (0, graphql_1.Mutation)(() => project_entity_1.Project),
-    __param(0, (0, graphql_1.Args)('id', { type: () => graphql_1.Int })),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], ProjectResolver.prototype, "removeProject", null);
 ProjectResolver = __decorate([
-    (0, graphql_1.Resolver)(() => project_entity_1.Project),
+    (0, graphql_1.Resolver)("Project"),
     __metadata("design:paramtypes", [project_service_1.ProjectService])
 ], ProjectResolver);
 exports.ProjectResolver = ProjectResolver;

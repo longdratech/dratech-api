@@ -17,6 +17,11 @@ let PrismaService = class PrismaService extends client_1.PrismaClient {
         console.log('disconnect');
         await this.$disconnect();
     }
+    async enableShutdownHooks(app) {
+        this.$on('beforeExit', async () => {
+            await app.close();
+        });
+    }
 };
 PrismaService = __decorate([
     (0, common_1.Injectable)()
