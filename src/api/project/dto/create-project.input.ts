@@ -3,13 +3,13 @@ import { IsOptional, Length, MaxLength } from "class-validator";
 
 @InputType()
 export class CreateProjectInput {
-  @Field()
+  @Field(() => String, { description: "Title is String, maxlengh 30" })
   @MaxLength(30)
   title: string;
 
-  @Field()
+  @Field(() => String, { description: "content is String, maxlengh 30" })
   content: string;
 
-  @Field()
+  @Field(() => String, { description: "img is String, type base64" })
   img: string;
 }

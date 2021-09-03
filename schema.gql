@@ -16,26 +16,90 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Service {
+  id: ID!
+
+  """icon convert base64"""
+  icon: String!
+
+  """title is String. maxlength 30"""
+  title: String!
+
+  """description is String. maxlength 30"""
+  description: String!
+
+  """client is String. Khách hàng. example: Jhone Smith , USA- 02"""
+  client: String!
+
+  """projectType is String. Loại dự án. Example: Search Engine Optimization"""
+  projectType: String!
+
+  """content is String. Nội dung được gửi ở dạng RichText"""
+  content: String!
+
+  """published is Bolean. Được công bố. Default: true"""
+  published: String!
+
+  """published is Bolean. Được công bố. Default: true"""
+  createdAt: String!
+}
+
 type Query {
   projects: [Project!]!
   project(id: Int!): Project!
+  services: [Service!]!
+  service(id: Int!): Service!
 }
 
 type Mutation {
-  createProject(createProjectInput: CreateProjectInput!): Project!
-  updateProject(updateProjectInput: UpdateProjectInput!): Project!
+  createProject(input: CreateProjectInput!): Project!
+  updateProject(update: UpdateProjectInput!): Project!
   removeProject(id: Int!): Project!
+  createService(input: CreateServiceInput!): Service!
+  updateService(update: UpdateServiceInput!): Service!
+  removeService(id: Int!): Service!
 }
 
 input CreateProjectInput {
+  """Title is String, maxlengh 30"""
   title: String!
+
+  """content is String, maxlengh 30"""
   content: String!
+
+  """img is String, type base64"""
   img: String!
 }
 
 input UpdateProjectInput {
+  """Title is String, maxlengh 30"""
   title: String
+
+  """content is String, maxlengh 30"""
   content: String
+
+  """img is String, type base64"""
   img: String
+  id: Int!
+}
+
+input CreateServiceInput {
+  icon: String!
+  title: String!
+  description: String!
+  client: String!
+  projectType: String!
+  content: String!
+  published: Boolean!
+}
+
+input UpdateServiceInput {
+  icon: String
+  title: String
+  description: String
+  client: String
+  projectType: String
+  content: String
+  published: Boolean
   id: Int!
 }

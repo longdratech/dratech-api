@@ -5,6 +5,7 @@ import { AppController } from "./app.controller";
 import { PrismaService } from "./prisma.service";
 import { ProjectResolver } from './api/project/project.resolver';
 import { ProjectModule } from './api/project/project.module';
+import { ServicesModule } from './api/services/services.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ProjectModule } from './api/project/project.module';
       autoSchemaFile: 'schema.gql',
     }),
     ProjectModule,
+    ServicesModule,
   ],
   controllers: [AppController],
 })

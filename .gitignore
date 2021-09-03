@@ -5,3 +5,4 @@ node_modules
 /node_modules
 /init-mongo.js
 /mongo-volumn
+schema.gql
