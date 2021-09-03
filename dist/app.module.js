@@ -10,7 +10,6 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const app_controller_1 = require("./app.controller");
-const prisma_service_1 = require("./prisma.service");
 const project_module_1 = require("./api/project/project.module");
 let AppModule = class AppModule {
 };
@@ -18,12 +17,12 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
             graphql_1.GraphQLModule.forRoot({
-                typePaths: ['./**/*.graphql'],
+                installSubscriptionHandlers: true,
+                autoSchemaFile: 'schema.gql',
             }),
             project_module_1.ProjectModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [prisma_service_1.PrismaService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

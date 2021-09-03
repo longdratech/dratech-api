@@ -8,40 +8,40 @@
 /* tslint:disable */
 /* eslint-disable */
 export class CreateProject {
-    title: string;
-    img: string;
     content: string;
+    img: string;
+    title: string;
 }
 
 export class UpdateProject {
+    content?: Nullable<string>;
     id: string;
-    title?: Nullable<string>;
     img?: Nullable<string>;
     published?: Nullable<boolean>;
-    content?: Nullable<string>;
-}
-
-export class Project {
-    id: string;
-    title: string;
-    img: string;
-    content: string;
-    published: boolean;
-    createdAt: string;
-}
-
-export abstract class IQuery {
-    abstract projects(): Project[] | Promise<Project[]>;
-
-    abstract project(id: string): Nullable<Project> | Promise<Nullable<Project>>;
+    title?: Nullable<string>;
 }
 
 export abstract class IMutation {
     abstract createProject(input?: Nullable<CreateProject>): Project | Promise<Project>;
 
-    abstract updateProject(input?: Nullable<UpdateProject>): Nullable<Project> | Promise<Nullable<Project>>;
-
     abstract deleteProject(id: string): Nullable<Project> | Promise<Nullable<Project>>;
+
+    abstract updateProject(input?: Nullable<UpdateProject>): Nullable<Project> | Promise<Nullable<Project>>;
+}
+
+export class Project {
+    content: string;
+    createdAt: string;
+    id: string;
+    img: string;
+    published: boolean;
+    title: string;
+}
+
+export abstract class IQuery {
+    abstract project(id: string): Nullable<Project> | Promise<Nullable<Project>>;
+
+    abstract projects(): Project[] | Promise<Project[]>;
 }
 
 type Nullable<T> = T | null;

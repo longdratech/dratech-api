@@ -1,23 +1,35 @@
-import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { CreateProject } from "src/graphql";
-import { ProjectService } from "./project.service";
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { ProjectService } from './project.service';
+import { Project } from './entities/project.entity';
+import { CreateProjectInput } from './dto/create-project.input';
+import { UpdateProjectInput } from './dto/update-project.input';
 
-@Resolver("Project")
+@Resolver(() => Project)
 export class ProjectResolver {
   constructor(private readonly projectService: ProjectService) {}
 
-  @Mutation("createProject")
-  async create(input: CreateProject) {
-    return this.projectService.create(input);
+  @Mutation(() => Project)
+  createProject(@Args('createProjectInput') createProjectInput: CreateProjectInput) {
+    return this.projectService.create(createProjectInput);
   }
 
-  @Query("projects")
-  async findAll() {
+  @Query(() => [Project], { name: 'projects' })
+  findAll() {
     return this.projectService.findAll();
   }
 
-  @Query("project")
-  async findOne(@Args("id") args: string) {
-    return this.projectService.findOne(args);
+  @Query(() => Project, { name: 'project' })
+  findOne(@Args('id', { type: () => Int }) id: number) {
+    return this.projectService.findOne(id);
+  }
+
+  @Mutation(() => Project)
+  updateProject(@Args('updateProjectInput') updateProjectInput: UpdateProjectInput) {
+    return this.projectService.update(updateProjectInput.id, updateProjectInput);
+  }
+
+  @Mutation(() => Project)
+  removeProject(@Args('id', { type: () => Int }) id: number) {
+    return this.projectService.remove(id);
   }
 }

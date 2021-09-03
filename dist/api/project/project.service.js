@@ -11,23 +11,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectService = void 0;
 const common_1 = require("@nestjs/common");
-const graphql_1 = require("../../graphql");
 const prisma_service_1 = require("../../prisma.service");
 let ProjectService = class ProjectService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async create(input) {
-        console.log(input);
-        return await this.prisma.project.create({ data: input });
+    async create(createProjectInput) {
+        return await this.prisma.project.create({ data: createProjectInput });
     }
     async findAll() {
-        return this.prisma.project.findMany();
+        return await this.prisma.project.findMany();
     }
     async findOne(id) {
-        return this.prisma.project.findUnique({
-            where: { id: id },
+        return await this.prisma.project.findUnique({
+            where: { id },
         });
+    }
+    async update(id, updateProjectInput) {
+        return await this.prisma.project.update({
+            where: { id },
+            data: updateProjectInput,
+        });
+    }
+    async remove(id) {
+        return await this.prisma.project.delete({ where: { id } });
     }
 };
 ProjectService = __decorate([

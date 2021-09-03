@@ -20,7 +20,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "studio": "prisma studio",
-    "generate": "prisma generate",
+    "generate": "npx prisma generate",
+    "generate:type": "ts-node generate-typings",
+    "generate:node": "node src/generate-typings.js",
     "push": "prisma db push"
   },
   "dependencies": {
@@ -33,11 +35,14 @@
     "@prisma/client": "^2.30.0",
     "apollo-server-express": "^2.25.2",
     "bson": "^4.5.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
     "graphql": "^15.5.2",
     "graphql-tools": "^8.2.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
